@@ -1,15 +1,17 @@
 (function (isNode) {
-    var base58, cryptoUtils, currencies;
+    var base58, cryptoUtils, currencies, sha3;
 
     if(isNode) {
         base58 = require('./base58');
         cryptoUtils = require('./crypto_utils');
         currencies = require('./currencies');
+        sha3 = require('./sha3');
     } else {
         var imports = window.WAValidator.__imports;
         base58 = imports.base58;
         cryptoUtils = imports.cryptoUtils;
         currencies = imports.currencies;
+        sha3 = imports.methods;
     }
 
     var DEFAULT_CURRENCY_NAME = 'bitcoin',
@@ -44,16 +46,46 @@
             networkType = networkType || DEFAULT_NETWORK_TYPE;
 
             var correctAddressTypes,
-                currency = currencies.getByNameOrSymbol(currencyNameOrSymbol),
-                addressType = this.getAddressType(address);
-            
-            if(networkType === 'prod' || networkType === 'testnet'){
-                correctAddressTypes = currency.addressTypes[networkType]
+                currency = currencies.getByNameOrSymbol(currencyNameOrSymbol);
+            if(currency.eip55){
+                return this.isAddress(address);
             } else {
-                correctAddressTypes = currency.addressTypes.prod.concat(currency.addressTypes.testnet);
-            }
+                var addressType = this.getAddressType(address);
+                
+                if(networkType === 'prod' || networkType === 'testnet'){
+                    correctAddressTypes = currency.addressTypes[networkType]
+                } else {
+                    correctAddressTypes = currency.addressTypes.prod.concat(currency.addressTypes.testnet);
+                }
 
-            return correctAddressTypes.indexOf(addressType) >= 0;
+                return correctAddressTypes.indexOf(addressType) >= 0;
+            }
+        },
+
+        isAddress: function (address) {
+            if (!/^(0x)?[0-9a-f]{40}$/i.test(address)) {
+                // check if it has the basic requirements of an address
+                return false;
+            } else if (/^(0x)?[0-9a-f]{40}$/.test(address) || /^(0x)?[0-9A-F]{40}$/.test(address)) {
+                // If it's all small caps or all all caps, return true
+                return true;
+            } else {
+                // Otherwise check each case
+                return this.isChecksumAddress(address);
+            }
+        },
+
+        isChecksumAddress: function (address) {
+            // Check each case
+            address = address.replace('0x','');
+            var addressHash = sha3['keccak256'](address.toLowerCase());
+            for (var i = 0; i < 40; i++ ) {
+                // the nth letter should be uppercase if the nth digit of casemap is 1
+                if ((parseInt(addressHash[i], 16) > 7 && address[i].toUpperCase() !== address[i]) || (parseInt(addressHash[i], 16) <= 7 && address[i].toLowerCase() !== address[i])) {
+                    return false;
+                }
+            }
+            return true;
         }
     };
 
