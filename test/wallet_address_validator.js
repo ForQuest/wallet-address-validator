@@ -1,4 +1,4 @@
-var isNode = typeof module !== 'undefined' && typeof module.exports !== 'undefined'
+var isNode = typeof module !== 'undefined' && typeof module.exports !== 'undefined';
 
 var chai = isNode ? require('chai') : window.chai,
     expect = chai.expect;
@@ -171,6 +171,68 @@ describe('WAValidator.validate()', function () {
             valid('mnYp36NuyRavMKQ9Q9Q6oGqoorAs9p3zYn', 'GRLC', 'testnet');
             valid('GU2NtcNotWFiZjTp2Vdgf5CjeMfgsWYCua', 'GRLC');
         });
+
+        it('should return true for correct Vertcoin addresses', function () {
+            valid('VmoMjGf3zgZLy8sk3PMKd3xikZHXWvnYi7', 'vertcoin');
+            valid('VmhHwXr3J8xMZpy62WuBGpu3xVvThWzcTQ', 'vertcoin');
+            valid('mvww6DEJ18dbyQUukpVQXvLgrNDJazZn1Y', 'vertcoin', 'testnet');
+            valid('mn3mdEE6cf1snxVsknNz4GRTdSrWXqYp7c', 'VTC', 'testnet');
+            valid('Vri6Q4GgNFfdtcpxD961TotJwaSaYQCaL5', 'VTC');
+        });
+
+        it('should return true for correct BitcoinGold addresses', function () {
+            valid('GW3JrQyHtoVfEFES3Y9JagiX3VSKQStLwj', 'bitcoingold');
+            valid('GUDWdeMyAXQbrNFFivAhkJQ1GfBCFdc7JF', 'bitcoingold');
+            valid('mvww6DEJ18dbyQUukpVQXvLgrNDJazZn1Y', 'bitcoingold', 'testnet');
+            valid('mn3mdEE6cf1snxVsknNz4GRTdSrWXqYp7c', 'BTG', 'testnet');
+            valid('GSNFPRsdaM3MXrU5HW1AxgFwmUQC8HXK9F', 'BTG');
+        });
+
+        it('should return true for correct Decred addresses', function () {
+            valid('Dsesax2GJnMN4wwmWo5rJGq73dDK217Rh85', 'DCR');
+            valid('DsYuxtvGRfN8rncXAndtLUpJm55F77K17RA', 'decred');
+            valid('DsaXDG2NrJW8g4tFAb8n9MNx81Sn3Qc8AEV', 'decred');
+            valid('TsijUgejaRnLKF5WAbpUxNtwKGUiKVeXLr7', 'decred', 'testnet');
+            valid('TsZ9QmAoadF12hGvyALp6qvaF4be3BmLqG9', 'dcr', 'testnet');
+        });
+
+        it('should return true for correct Digibyte addresses', function () {
+            valid('DG2rM2orU2JH5i4ACh3AKNpRTNESdv5xf8', 'DGB');
+            valid('DBR2Lj1F17eHGHXgbpae2Wb4m39bDyA1qo', 'DGB');
+            valid('D9TDZTR9Z9Mx2NoDJnhqhnYhDLKRAmsL9n', 'digibyte');
+            valid('DHRzA1YHA1kFWpz2apRckZJy6KZRyGq4EV', 'digibyte');
+            valid('DJ53hTyLBdZp2wMi5BsCS3rtEL1ioYUkva', 'digibyte');
+        });
+
+        it('should return true for correct CannabisCoin addresses', function () {
+            valid('CfF9uCADAYsLCuYVpNkFNtaM4miNtMeRpW', 'CANN');
+            valid('CR2Q29uviVoxRNUbz7jQSZmbTRznUFtk6r', 'Cann');
+            valid('CRUhje8DCUHttgEJNxUd2tfAVanbGye4QP', 'CannabisCoin');
+            valid('CHisGHn5ZbTLjrAzpVKWhHf8F6FY8ajWMH', 'cannabiscoin');
+            valid('CQzhGu8HTR8sYeMD4qjZopJkbfe8vdbEXL', 'cannabiscoin');
+        });
+
+        it('should return true for correct Ethereum addresses', function () {
+            valid('0xE37c0D48d68da5c5b14E5c1a9f1CFE802776D9FF', 'ethereum');
+            valid('0xa00354276d2fC74ee91e37D085d35748613f4748', 'ethereum');
+            valid('0xAff4d6793F584a473348EbA058deb8caad77a288', 'ETH');
+            valid('0xc6d9d2cd449a754c494264e1809c50e34d64562b', 'ETH');
+            valid('0x52908400098527886E0F7030069857D2E4169EE7', 'ETH');
+            valid('0x8617E340B3D01FA5F11F306F4090FD50E238070D', 'ETH');
+            valid('0xde709f2102306220921060314715629080e2fb77', 'ETH');
+            valid('0x27b1fdb04752bbc536007a920d24acb045561c26', 'ETH');
+            valid('0x5aAeb6053F3E94C9b9A09f33669435E7Ef1BeAed', 'ETH');
+            valid('0xfB6916095ca1df60bB79Ce92cE3Ea74c37c5d359', 'ETH');
+            valid('0xdbF03B407c01E7cD3CBea99509d93f8DDDC8C6FB', 'ETH');
+            valid('0xD1220A0cf47c7B9Be7A2E6BA89F429762e7b9aDb', 'ETH');
+
+            valid('0xD1220A0cf47c7B9Be7A2E6BA89F429762e7b9aDb', 'ethereumclassic');
+            valid('0xD1220A0cf47c7B9Be7A2E6BA89F429762e7b9aDb', 'ETC');
+            valid('0xD1220A0cf47c7B9Be7A2E6BA89F429762e7b9aDb', 'etherzero');
+            valid('0xD1220A0cf47c7B9Be7A2E6BA89F429762e7b9aDb', 'ETZ');
+            valid('0xD1220A0cf47c7B9Be7A2E6BA89F429762e7b9aDb', 'callisto');
+            valid('0xD1220A0cf47c7B9Be7A2E6BA89F429762e7b9aDb', 'CLO');
+        });
     });
 
     describe('invalid results', function () {
@@ -238,5 +300,36 @@ describe('WAValidator.validate()', function () {
             commonTests('garlicoin');
         });
 
+        it('should return false for incorrect vertcoin addresses', function () {
+            commonTests('vertcoin');
+        });
+
+        it('should return false for incorrect bitcoingold addresses', function () {
+            commonTests('bitcoingold');
+        });
+
+        it('should return false for incorrect decred addresses', function () {
+            commonTests('decred');
+        });
+
+        it('should return false for incorrect digibyte addresses', function () {
+            commonTests('digibyte');
+        });
+
+        it('should return false for incorrect cannabiscoin addresses', function () {
+            commonTests('cannabiscoin');
+        });
+
+        it('should return false for incorrect eip55 addresses', function () {
+            invalid('6xAff4d6793F584a473348EbA058deb8caad77a288', 'ethereum');
+            invalid('0x02fcd51aAbB814FfFe17908fbc888A8975D839A5', 'ethereum');
+            invalid('0XD1220A0CF47C7B9BE7A2E6BA89F429762E7B9ADB', 'ethereum');
+            invalid('aFf4d6793f584a473348ebA058deb8caad77a2885', 'ethereum');
+            invalid('0xff4d6793F584a473', 'ethereum');
+
+            invalid('0x02fcd51aAbB814FfFe17908fbc888A8975D839A5', 'ethereumclassic');
+            invalid('0x02fcd51aAbB814FfFe17908fbc888A8975D839A5', 'etherzero');
+            invalid('0x02fcd51aAbB814FfFe17908fbc888A8975D839A5', 'callisto');
+        });
     });
 });

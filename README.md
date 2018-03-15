@@ -3,11 +3,11 @@ Simple wallet address validator for validating Bitcoin and other altcoins addres
 
 Forked from [ryanralph/altcoin-address](https://github.com/ryanralph/altcoin-address).
 
-I forked it to remove all Node.js dependencies (crypro, Buffer etc.) to make it usable in the browser as well. I didn't use browserify to achieve smaller footprint, **file size is 4.0 kB (minifed and gzipped)**.
+**File size is ~17 kB (minifed and gzipped)**.
 
 ## Installation
 
-### Node
+### NPM
 ```
 npm install wallet-address-validator
 ```
@@ -16,12 +16,6 @@ npm install wallet-address-validator
 ```html
 <script src="wallet-address-validator.min.js"></script>
 ```
-
-#### Using bower
-```
-bower install wallet-address-validator
-```
-
 
 ## API
 
@@ -55,6 +49,18 @@ bower install wallet-address-validator
 * Auroracoin/AUR, `'auroracoin'` or `'AUR'`
 * Namecoin/NMC, `'namecoin'` or `'NMC'`
 * Biocoin/BIO, `'biocoin'` or `'BIO'`
+* Garlicoin/GRLC, `'garlicoin'` or `'GRLC'`
+* Vertcoin/VTC, `'vertcoin'` or `'VTC'`
+* BitcoinGold/BTG, `'bitcoingold'` or `'BTG'`
+* Decred/DCR, `'decred'` or `'DCR'`
+* Digibyte/DGB, `'digibyte'` or `'DGB'`
+
+
+* Ethereum/ETH, `'ethereum'` or `'ETH'`
+* EthereumClassic/ETH, `'ethereumclassic'` or `'ETC'`
+* EthereumZero/ETZ, `'etherzero'` or `'ETZ'`
+* Callisto/CLO, `'callisto'` or `'CLO'`
+
 
 ### Usage example
 
